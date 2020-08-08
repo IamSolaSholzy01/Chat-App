@@ -1,0 +1,41 @@
+{% extends "main.html" %}
+
+{% block title %}Test Message App | Home{% endblock %}
+
+{% block content %}
+
+    <div class="container" style="padding-top: 30px;">
+
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Messages</h2>
+                {% if messages %}
+                    {% for m in messages %}
+                        {% if m.sender == g.user['username'] %}
+                            <div style="float: right; text-align: right; width: 100%">
+                                <p>From: {{ m.sender }}</p>
+                                <p>To: {{ m.recipient }}</p>
+                                <p>Message: {{ m.message }}</p>
+                                <p>Time: {{ m.dt }}</p>
+                            </div>
+                        {% else %}
+                            <div style="float: left; text-align: left; width: 100%;">
+                                <p>From: {{ m.sender }}</p>
+                                <p>To: {{ m.recipient }}</p>
+                                <p>Message: {{ m.message }}</p>
+                                <p>Time: {{ m.dt }}</p>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <p>No messages found.</p>
+                {% endif %}
+            </div>
+        </div>
+        <form method="POST">
+            <input type="text" name="message" id="message" placeholder="Type your message here">
+            <input type="submit" name="submit" id="submit" value="Send">
+        </form>
+    </div>
+
+{% endblock %}

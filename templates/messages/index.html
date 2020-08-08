@@ -1,0 +1,35 @@
+{% extends "main.html" %}
+
+{% block title %}Test Message App | Home{% endblock %}
+
+{% block content %}
+
+    <div class="container" style="padding-top: 50px;">
+
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Select a User to Start a Chat</h2>
+                <form id="mainform" method="post">
+                    <div class="form-group">
+                        <label for="recipient">Recipient:</label>
+                        <input id="recipient" class="form-control" name="recipient" placeholder="Your recipient" required>
+                    </div>
+                    <input class="btn btn-default" type="submit" value="Submit">
+                </form>
+
+            </div>
+            <div class="col-md-8">
+
+                <h2>Messages</h2>
+                {% if messages %}
+                    {% for m in messages %}
+                        <a href="{{ url_for('messages.thread', thread_identifier=m.conversation) }}">{{ m.conversation }}</a><br />
+                    {% endfor %}
+                {% else %}
+                    <p>No messages found.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
