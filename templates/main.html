@@ -36,7 +36,6 @@
                         <ul class="nav navbar-nav">
                             <li><a href="{{ url_for('messages.home') }}">Home</a></li>
                             <li><a href="{{ url_for('about') }}">About</a></li>
-                            <li><a href="{{ url_for('admin') }}">Admin</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                         {% if not 'logged_in' in session %}
@@ -44,7 +43,7 @@
                             <li><a href="{{ url_for('auth.register') }}">Register</a></li>
                         {% else %}
                             {% if g.user %}
-                            <li><span>{{ g.user['username'] }}</span></li>
+                            <li><p style="margin-block-end: 1em; margin-block-start: 1em;">{{ g.user['username'] }}</p></li>
                             {% endif %}
                             <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                         {% endif %}

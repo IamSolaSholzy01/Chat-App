@@ -23,7 +23,9 @@
                 <h2>Messages</h2>
                 {% if messages %}
                     {% for m in messages %}
-                        <a href="{{ url_for('messages.thread', thread_identifier=m.conversation) }}">{{ m.conversation }}</a><br />
+                    <div style="padding: 5px; background-color: teal; margin-bottom: 5px;">
+                        <a style="color:white; font-size: medium;" href="{{ url_for('messages.thread', thread_identifier=m.conversation) }}">{{ m.conversation }}</a><br />
+                    </div>
                     {% endfor %}
                 {% else %}
                     <p>No messages found.</p>
