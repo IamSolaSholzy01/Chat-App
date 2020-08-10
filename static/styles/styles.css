@@ -1,0 +1,10 @@
+body {
+    background-color: #942F2F;
+}
+#picture {
+    width: 249px;
+    height: 219px;
+    background: url(Love_Letter_Emoji_large.jpg);
+    border-radius: 29px;
+    margin: auto;
+}
