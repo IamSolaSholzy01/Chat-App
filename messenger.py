@@ -3,7 +3,8 @@ import sqlite3
 
 from flask import Flask, jsonify, make_response, redirect, render_template, request, session, url_for
 
-import settings    
+import settings 
+from messager import _get_message_threads   
 # create and configure the app
 app = Flask(__name__, instance_relative_config=True)
 app.config.from_object(settings)
