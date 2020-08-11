@@ -67,31 +67,16 @@ def about():
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
-        _add_message(request.form['message'], request.form['username'])
-        redirect(url_for('home'))
+        session['recipient']=request.form['recipient']
+        return redirect(url_for('messages.thread', thread_identifier=request.form['recipient']))
 
-    return render_template('index.html', messages=_get_messages())
+    return render_template('messages/index.html', messages=_get_message_threads(username=session.get('username')))
 
 
 @app.route('/main')
 def main():
     return render_template('main.html')
 
-
-@app.route('/admin', methods=['GET', 'POST'])
-def admin():
-    if not 'logged_in' in session:
-        return redirect(url_for('login'))
-
-    if request.method == 'POST':
-        # This little hack is needed for testing due to how Python dictionary keys work
-        _delete_message([k[6:] for k in request.form.keys()])
-        redirect(url_for('admin'))
-
-    messages = _get_message()
-    messages.reverse()
-
-    return render_template('admin.html', messages=messages)
 
 # RESTful routing (serves JSON to provide an external API)
 @app.route('/messages/api', methods=['GET'])
